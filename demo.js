@@ -8,16 +8,18 @@ let browserWillbeLauncedPromise = puppeteer.launch({
        rgs: ['--start-maximized']
 })
 
-browserWillbeLauncedPromise.then(function(browserInstance){
-       let newTabPromise= browserInstance.newPage()
+browserWillbeLauncedPromise.then(function (browserInstance) {
+       let newTabPromise = browserInstance.newPage()
        return newTabPromise;
-}).then(function (newTab){
-  console.log('New Tab opened')
-  let pageWillbeOpenedPromise = newTab.goto('https://www.pepcoding.com/')
-  return pageWillbeOpenedPromise
 
-}).then(function(webPage){
-       console.log('Website opened')
+}).then(function (newTab) {
+       console.log('New Tab Opened')
+
+       let pageWillBeOpenedPromise = newTab.goto('https://www.pepcoding.com/');
+       return pageWillBeOpenedPromise;
+
+}).then(function (webPage) {
+       console.log('Website Opened')
 })
 
 
