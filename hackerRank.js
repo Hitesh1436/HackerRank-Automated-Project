@@ -1,13 +1,13 @@
 const loginLink = "https://www.hackerrank.com/auth/login";
 
-let email = "fesagom584@chatich.com";
-let password = "pepcoding123";
+let email = "paseher330@sueshaw.com";
+let password = "hitesh123";
 
 let puppeteer = require("puppeteer");
 
 console.log("Before");
 
-let page;
+let page;  // ek global variable bnya tki khin bhi use krske 
 
 // Puppeteer works on promises
 
@@ -30,46 +30,43 @@ browserWillbeLauncedPromise
     return pageWillbeOpenedPromise;
   })
   .then(function () {
-    let typedEmailPromise = page.type("input[id='input-1']", email, {
-      delay: 100,
-    });
+    let typedEmailPromise = page.type("input[id='input-1']", email, { delay: 100 });
     return typedEmailPromise;
   })
   .then(function () {
-    let typePasswordPromise = page.type("input[id='input-2']", password, {
-      delay: 100,
-    });
+    let typePasswordPromise = page.type("input[id='input-2']", password, { delay: 100 });
     return typePasswordPromise;
-  })
-  .then(function () {
-    let loginPromise = page.click('button[data-analytics="LoginPassword"]', {
-      delay: 100,
-    });
+    
+  }).then(function () {
+    let loginPromise = page.click('button[data-analytics="LoginPassword"]', { delay: 100, });
     return loginPromise;
-  }).then(function(){
-    let algoWillBeClickedPromise = waitAndClick('.topic-card a[data-attr1="algorithms"]',page)
+
+  }).then(function () {
+    let algoWillBeClickedPromise = waitAndClick('.topic-card a[data-attr1="algorithms"]', page)
     return algoWillBeClickedPromise;
-  }).then(function(){
+
+  }).then(function () {
     console.log('Algo Section Clicked');
-  }).then(function(){
-    let getToWarmupPromise = waitAndClick('input[value="warmup"]',page)
+  }).then(function () {
+    let getToWarmupPromise = waitAndClick('input[value="warmup"]', page)
     return getToWarmupPromise;
-  }).then(function(){
+
+  }).then(function () {
     console.log('Warmup Section Clicked');
   });
 
-  function waitAndClick(selector , cPage){
-    return new Promise(function(resolve  , reject){
-      let waitForModalPromise = cPage.waitForSelector(selector);
-      waitForModalPromise.then(function(){
-        let clickModalPromise = cPage.click(selector , {delay : 100})
-        return clickModalPromise
-      }).then(function(){
-        resolve()
-      }).catch(function(){
-        reject()
-      })
+function waitAndClick(selector, cPage) {
+  return new Promise(function (resolve, reject) {
+    let waitForModalPromise = cPage.waitForSelector(selector);
+    waitForModalPromise.then(function () {
+      let clickModalPromise = cPage.click(selector, { delay: 100 })
+      return clickModalPromise
+    }).then(function () {
+      resolve()
+    }).catch(function () {
+      reject()
     })
+  })
 }
 
 // console.log("After");
